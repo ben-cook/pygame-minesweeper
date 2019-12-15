@@ -33,12 +33,12 @@ class Tile:
         self.x = x
         self.y = y
         self.rect = pygame.Rect((x, y), (TILE_WIDTH, TILE_WIDTH))
-        self.image = pygame.image.load('unclicked_tile.png')
+        self.image = pygame.image.load(os.path.join("images", 'unclicked_tile.png'))
         self.clicked = False
         self.right_clicked = False
 
     def rightClick(self):
-        self.image = pygame.image.load('flagged_tile.png')
+        self.image = pygame.image.load(os.path.join("images", 'flagged_tile.png'))
         self.right_clicked = True
 
 class BlankTile(Tile):
@@ -49,21 +49,21 @@ class BlankTile(Tile):
     
     def click(self):
         if self.surrounding_bombs == 0:
-            self.image = pygame.image.load('clicked_tile.png')
+            self.image = pygame.image.load(os.path.join("images", 'clicked_tile.png'))
         elif self.surrounding_bombs == 1:
-            self.image = pygame.image.load('1.png')
+            self.image = pygame.image.load(os.path.join("images", '1.png'))
         elif self.surrounding_bombs == 2:
-            self.image = pygame.image.load('2.png')
+            self.image = pygame.image.load(os.path.join("images", '2.png'))
         elif self.surrounding_bombs == 3:
-            self.image = pygame.image.load('3.png')
+            self.image = pygame.image.load(os.path.join("images", '3.png'))
         elif self.surrounding_bombs == 4:
-            self.image = pygame.image.load('4.png')
+            self.image = pygame.image.load(os.path.join("images", '4.png'))
         elif self.surrounding_bombs == 5:
-            self.image = pygame.image.load('5.png')
+            self.image = pygame.image.load(os.path.join("images", '5.png'))
         elif self.surrounding_bombs == 6:
-            self.image = pygame.image.load('6.png')
+            self.image = pygame.image.load(os.path.join("images", '6.png'))
         else:
-            self.image = pygame.image.load('clicked_tile.png')
+            self.image = pygame.image.load(os.path.join("images", 'clicked_tile.png'))
         
         self.clicked = True
 
@@ -71,21 +71,21 @@ class BombTile(Tile):
     def __init__(self, x, y):
         super().__init__(x, y)
         if EXPOSE_FLAGS:
-            self.image = pygame.image.load('unclicked_bomb.png')
+            self.image = pygame.image.load(os.path.join("images", 'unclicked_bomb.png'))
 
     def click(self):
-        self.image = pygame.image.load('bomb.png')
+        self.image = pygame.image.load(os.path.join("images", 'bomb.png'))
         self.clicked = True
 
 class GameOverImage:
     def __init__(self, x, y):
         self.rect = pygame.Rect((x, y), (100, 100))
-        self.image = pygame.image.load('game_over.png')
+        self.image = pygame.image.load(os.path.join("images", 'game_over.png'))
 
 class GameWinImage:
     def __init__(self, x, y):
         self.rect = pygame.Rect((x, y), (100, 100))
-        self.image = pygame.image.load('game_win.png')
+        self.image = pygame.image.load(os.path.join("images", 'game_win.png'))
 
 def calculate_surrounding_bombs(grid_array, tile_x, tile_y):
     surrounding_bombs = 0
@@ -112,10 +112,10 @@ def get_surrounding_tiles(tile_x, tile_y):
             neighbours.append((tile_x + 1, tile_y - 1))
         if tile_y < GRID_HEIGHT - 1:
             neighbours.append((tile_x + 1, tile_y + 1))
-    
+
     if tile_y > 0:
         neighbours.append((tile_x, tile_y - 1))
-    
+
     if tile_y < GRID_HEIGHT - 1:
         neighbours.append((tile_x, tile_y + 1))
 
